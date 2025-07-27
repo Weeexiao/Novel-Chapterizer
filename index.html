@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小说章节分割工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>小说章节分割工具</h1>
+        <div class="upload-section">
+            <label for="novelFile">选择TXT小说文件：</label>
+            <input type="file" id="novelFile" accept=".txt">
+        </div>
+        
+        <div class="options-section">
+            <label for="encoding">文件编码：</label>
+            <select id="encoding">
+                <option value="utf-8" selected>UTF-8</option>
+                <option value="gbk">GBK</option>
+                <option value="gb2312">GB2312</option>
+                <option value="ascii">ASCII</option>
+            </select>
+        </div>
+        
+        <div class="rules-section">
+            <label for="presetRules">章节标题规则：</label>
+            <select id="presetRules">
+                <option value="default" selected>默认规则（第1章 标题）</option>
+                <option value="numberOnly">数字章节（第1章）</option>
+                <option value="chineseOnly">中文数字章节（第一章）</option>
+                <option value="custom">自定义规则</option>
+            </select>
+            
+            <div id="customRuleSection" style="display: none; margin-top: 10px;">
+                <label for="customRule">自定义正则表达式：</label>
+                <input type="text" id="customRule" placeholder="请输入正则表达式，例如：^(第[一二三四五六七八九十\d]+章)(?:\s+)(.*)$">
+                <small>提示：使用捕获组()来定义章节标题和章节名称部分</small>
+            </div>
+        </div>
+        
+        <button id="processBtn">分割章节</button>
+        
+        <div id="result" class="result-section" style="display: none;">
+            <h2>分割结果</h2>
+            <div class="download-buttons">
+                <button id="batchDownloadBtn">批量下载所有章节</button>
+                <button id="epubDownloadBtn">生成并下载EPUB电子书</button>
+            </div>
+            <div id="downloadLinks"></div>
+        </div>
+    </div>
+    
+    <!-- 引入 JSZip 库用于创建 ZIP 文件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
